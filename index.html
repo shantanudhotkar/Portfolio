@@ -491,21 +491,22 @@ footer span{color:var(--accent)}
         </div>
       </div>
       <div class="reveal d2">
-        <form class="c-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="c-form" id="contactForm">
           <div class="fg">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" class="fi" placeholder="John Doe" required>
+            <label for="cname">Your Name</label>
+            <input type="text" id="cname" class="fi" placeholder="John Doe">
           </div>
           <div class="fg">
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" class="fi" placeholder="john@example.com" required>
+            <label for="cemail">Your Email</label>
+            <input type="email" id="cemail" class="fi" placeholder="john@example.com">
           </div>
           <div class="fg">
-            <label for="msg">Message</label>
-            <textarea id="msg" name="message" class="fi" placeholder="Tell me about your project or opportunity..." required></textarea>
+            <label for="cmsg">Message</label>
+            <textarea id="cmsg" class="fi" placeholder="Tell me about your project or opportunity..."></textarea>
           </div>
-          <button type="submit" class="c-btn">Send Message <i class="fas fa-paper-plane"></i></button>
-        </form>
+          <button type="button" class="c-btn" id="sendBtn" onclick="sendMsg()">Send Message <i class="fas fa-paper-plane"></i></button>
+          <p id="form-status" style="font-size:13px;color:var(--accent);margin-top:10px;display:none;font-family:var(--fm);">✓ Opening your email client...</p>
+        </div>
       </div>
     </div>
   </div>
@@ -563,6 +564,26 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Contact form mailto
+function sendMsg() {
+  const name = document.getElementById('cname').value.trim();
+  const email = document.getElementById('cemail').value.trim();
+  const msg = document.getElementById('cmsg').value.trim();
+  if (!name || !email || !msg) {
+    alert('Please fill in all fields before sending.');
+    return;
+  }
+  const subject = encodeURIComponent('Portfolio Contact from ' + name);
+  const body = encodeURIComponent(
+    'Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + msg
+  );
+  window.location.href = 'mailto:shantanudhotkar1@gmail.com?subject=' + subject + '&body=' + body;
+  document.getElementById('form-status').style.display = 'block';
+  document.getElementById('cname').value = '';
+  document.getElementById('cemail').value = '';
+  document.getElementById('cmsg').value = '';
+}
 
 // Skill bars (direct observe for accuracy)
 document.querySelectorAll('.skill-item').forEach(item => {
