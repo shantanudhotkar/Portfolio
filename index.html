@@ -3,254 +3,576 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shantanu Dhotkar | Embedded Engineer</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
+<title>Shantanu Dhotkar | Embedded Systems Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: 'Segoe UI',sans-serif;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070c14;
+  --bg2:#0d1424;
+  --card:rgba(255,255,255,0.03);
+  --accent:#00ffd5;
+  --accent-dim:rgba(0,255,213,0.08);
+  --accent-glow:rgba(0,255,213,0.25);
+  --blue:#38bdf8;
+  --t1:#e2e8f0;
+  --t2:#94a3b8;
+  --t3:#475569;
+  --border:rgba(255,255,255,0.06);
+  --border-a:rgba(0,255,213,0.25);
+  --ff:'Exo 2',sans-serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
 }
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+.container{max-width:1100px;margin:0 auto;padding:0 32px}
+.section{padding:110px 0}
+.section-tag{font-family:var(--fm);font-size:12px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;display:block}
+.section-title{font-family:var(--ff);font-size:clamp(30px,4vw,46px);font-weight:800;color:var(--t1);margin-bottom:14px;line-height:1.1;letter-spacing:-0.5px}
+.section-title span{color:var(--accent)}
+.section-div{width:50px;height:3px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:56px;border-radius:2px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-body{
-height:100vh;
-color:white;
-background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#0f2027);
-background-size:400% 400%;
-animation:gradientBG 12s ease infinite;
-overflow-x:hidden;
-text-align:center;
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 0;transition:all .35s}
+nav.scrolled{background:rgba(7,12,20,.96);backdrop-filter:blur(20px);padding:14px 0;border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--ff);font-size:20px;font-weight:800;color:var(--t1);text-decoration:none;letter-spacing:-0.5px}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:34px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--t2);text-decoration:none;letter-spacing:.5px;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{width:100%}
+.hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--t1);font-size:21px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,213,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,213,.025) 1px,transparent 1px);background-size:48px 48px;animation:gridMove 20s linear infinite;pointer-events:none}
+@keyframes gridMove{to{transform:translateY(48px)}}
+.orb1{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,213,.07) 0%,transparent 70%);top:-150px;right:-120px;pointer-events:none}
+.orb2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.05) 0%,transparent 70%);bottom:-100px;left:-80px;pointer-events:none}
+.hero-wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center}
+.hero-greeting{font-family:var(--fm);font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.hero-greeting::before{content:'';width:28px;height:1px;background:var(--accent)}
+.hero-name{font-family:var(--ff);font-size:clamp(42px,6vw,72px);font-weight:800;line-height:1.05;margin-bottom:14px;letter-spacing:-1.5px}
+.hero-name span{color:var(--accent)}
+.hero-sub{font-family:var(--ff);font-size:clamp(17px,2.2vw,24px);font-weight:400;color:var(--t2);margin-bottom:22px;min-height:36px}
+.hero-sub #typed{color:var(--blue);font-weight:600}
+.blink{display:inline-block;width:2px;height:.9em;background:var(--accent);margin-left:3px;vertical-align:middle;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-desc{font-size:15.5px;color:var(--t2);max-width:510px;line-height:1.85;margin-bottom:34px}
+.hero-desc strong{color:var(--accent);font-weight:600}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn-p{padding:13px 30px;background:var(--accent);color:#000;font-family:var(--ff);font-size:14px;font-weight:700;letter-spacing:.5px;border:none;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--accent-glow)}
+.btn-o{padding:13px 30px;background:transparent;color:var(--t1);font-family:var(--ff);font-size:14px;font-weight:600;letter-spacing:.5px;border:1px solid var(--border-a);border-radius:6px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+.btn-o:hover{background:var(--accent-dim);border-color:var(--accent);transform:translateY(-2px)}
+.hero-socials{display:flex;gap:12px;margin-top:32px}
+.soc{width:40px;height:40px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t2);text-decoration:none;font-size:16px;transition:all .3s}
+.soc:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:28px;margin-top:38px;padding-top:28px;border-top:1px solid var(--border)}
+.stat-n{font-family:var(--ff);font-size:26px;font-weight:800;color:var(--accent);line-height:1}
+.stat-l{font-size:11px;color:var(--t3);letter-spacing:.5px;margin-top:5px}
+
+/* PROFILE IMG */
+.img-wrap{position:relative;width:270px;height:270px}
+.img-wrap::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(var(--accent),transparent 40%,var(--blue),transparent 80%,var(--accent));animation:spin 8s linear infinite;z-index:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.img-wrap::after{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--bg);z-index:1}
+.img-wrap img{position:absolute;inset:9px;width:calc(100% - 18px);height:calc(100% - 18px);border-radius:50%;object-fit:cover;z-index:2;animation:float 5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.about-text p{color:var(--t2);margin-bottom:18px;line-height:1.9;font-size:15px}
+.about-text strong{color:var(--accent);font-weight:600}
+.highlight-box{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;margin-top:24px}
+.highlight-box i{color:var(--accent);font-size:18px;margin-top:2px;flex-shrink:0}
+.highlight-box p{margin:0!important;font-size:14px!important;color:var(--t2)!important}
+.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ic{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .3s}
+.ic:hover{border-color:var(--border-a);background:var(--accent-dim);transform:translateY(-2px)}
+.ic i{font-size:20px;color:var(--accent);margin-bottom:10px;display:block}
+.ic h4{font-family:var(--ff);font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px}
+.ic p{font-size:12px;color:var(--t2);line-height:1.5}
+
+/* SKILLS */
+.skills-bg{background:var(--bg2)}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.skill-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;transition:border-color .3s}
+.skill-item:hover{border-color:var(--border-a)}
+.skill-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.skill-left{display:flex;align-items:center;gap:10px}
+.skill-ico{width:30px;height:30px;border-radius:6px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--accent);flex-shrink:0}
+.skill-name{font-family:var(--ff);font-size:13.5px;font-weight:700;color:var(--t1)}
+.skill-lvl{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:1px}
+.bar-bg{height:4px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--blue));width:0%;transition:width 1.3s cubic-bezier(.16,1,.3,1)}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:all .4s}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--blue));opacity:0;transition:opacity .3s}
+.proj-card:hover{border-color:var(--border-a);transform:translateY(-6px);box-shadow:0 22px 60px rgba(0,0,0,.5)}
+.proj-card:hover::before{opacity:1}
+.proj-icon{width:42px;height:42px;border-radius:10px;background:var(--accent-dim);border:1px solid var(--border-a);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--accent);margin-bottom:18px;flex-shrink:0}
+.proj-title{font-family:var(--ff);font-size:16px;font-weight:700;color:var(--t1);margin-bottom:10px;line-height:1.3}
+.proj-desc{font-size:13.5px;color:var(--t2);line-height:1.75;flex:1;margin-bottom:18px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{padding:3px 9px;background:rgba(0,255,213,.06);border:1px solid rgba(0,255,213,.14);border-radius:4px;font-family:var(--fm);font-size:10px;color:var(--accent);letter-spacing:.5px}
+
+/* EDUCATION */
+.edu-bg{background:var(--bg2)}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:5px;top:10px;bottom:10px;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
+.tl-item{position:relative;margin-bottom:36px}
+.tl-dot{position:absolute;left:-25px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg2);box-shadow:0 0 10px var(--accent-glow)}
+.tl-date{font-family:var(--fm);font-size:11px;color:var(--accent);letter-spacing:1.5px;margin-bottom:7px;text-transform:uppercase}
+.tl-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 26px;transition:border-color .3s}
+.tl-card:hover{border-color:var(--border-a)}
+.tl-title{font-family:var(--ff);font-size:16px;font-weight:700;color:var(--t1);margin-bottom:4px}
+.tl-sub{font-size:13.5px;color:var(--t2);margin-bottom:10px}
+.badge{display:inline-block;padding:3px 10px;background:var(--accent-dim);border:1px solid var(--border-a);border-radius:4px;font-family:var(--fm);font-size:11px;color:var(--accent)}
+.ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:56px}
+.ach-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;align-items:flex-start;gap:14px;transition:border-color .3s}
+.ach-card:hover{border-color:var(--border-a)}
+.ach-ico{width:34px;height:34px;border-radius:8px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--accent);flex-shrink:0}
+.ach-card h4{font-family:var(--ff);font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:4px}
+.ach-card p{font-size:12px;color:var(--t2);line-height:1.5}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.c-title{font-family:var(--ff);font-size:22px;font-weight:700;color:var(--t1);margin-bottom:10px}
+.c-sub{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:30px}
+.c-links{display:flex;flex-direction:column;gap:12px}
+.c-link{display:flex;align-items:center;gap:14px;padding:15px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--t1);transition:all .3s}
+.c-link:hover{border-color:var(--border-a);background:var(--accent-dim);transform:translateX(4px)}
+.c-ico{width:36px;height:36px;border-radius:8px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--accent);flex-shrink:0}
+.c-text span:first-child{display:block;font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.5px}
+.c-text span:last-child{display:block;font-size:13.5px;font-weight:500;color:var(--t1)}
+.c-form{display:flex;flex-direction:column;gap:14px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg label{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:1px;text-transform:uppercase}
+.fi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px 15px;color:var(--t1);font-family:var(--fb);font-size:14px;outline:none;width:100%;transition:border-color .3s}
+.fi:focus{border-color:var(--accent)}
+.fi::placeholder{color:var(--t3)}
+textarea.fi{resize:none;height:118px;line-height:1.6}
+.c-btn{padding:13px 28px;background:var(--accent);color:#000;font-family:var(--ff);font-size:14px;font-weight:700;border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;letter-spacing:.5px;width:100%}
+.c-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--accent-glow)}
+
+/* FOOTER */
+footer{padding:28px 0;border-top:1px solid var(--border);text-align:center}
+footer p{font-family:var(--fm);font-size:11px;color:var(--t3);letter-spacing:1px}
+footer span{color:var(--accent)}
+
+/* MOBILE */
+@media(max-width:900px){
+  .hero-wrap{grid-template-columns:1fr;text-align:center}
+  .img-wrap{width:200px;height:200px;margin:0 auto 20px}
+  .hero-greeting,.hero-cta,.hero-socials,.hero-stats{justify-content:center}
+  .hero-desc{margin:0 auto 30px}
+  .about-grid{grid-template-columns:1fr;gap:36px}
+  .skills-grid,.proj-grid,.ach-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:36px}
+  .nav-links{display:none;position:fixed;inset:0;background:rgba(7,12,20,.98);flex-direction:column;align-items:center;justify-content:center;gap:36px;z-index:999}
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:20px}
+  .hamburger{display:block;z-index:1001}
+  .info-cards{grid-template-columns:1fr 1fr}
 }
-
-/* Animated background */
-@keyframes gradientBG{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+@media(max-width:600px){
+  .container{padding:0 20px}
+  .info-cards{grid-template-columns:1fr}
+  .hero-stats{gap:18px}
+  .proj-grid{grid-template-columns:1fr}
 }
-
-/* Hardware grid animation */
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background-image:
-linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-background-size:40px 40px;
-animation:gridMove 15s linear infinite;
-z-index:-1;
-}
-
-@keyframes gridMove{
-0%{transform:translateY(0);}
-100%{transform:translateY(40px);}
-}
-
-/* Navbar */
-nav{
-display:flex;
-justify-content:space-between;
-padding:20px 60px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-}
-
-nav h2{
-font-weight:600;
-}
-
-nav ul{
-display:flex;
-gap:30px;
-list-style:none;
-}
-
-nav a{
-text-decoration:none;
-color:white;
-transition:0.3s;
-}
-
-nav a:hover{
-color:#00ffd5;
-}
-
-/* Hero */
-.hero{
-padding-top:80px;
-}
-
-.profile{
-width:150px;
-height:150px;
-border-radius:50%;
-border:4px solid #00ffd5;
-box-shadow:0 0 30px #00ffd5;
-animation:float 4s ease-in-out infinite;
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-}
-
-.hero h1{
-font-size:48px;
-margin-top:20px;
-}
-
-.hero p{
-max-width:650px;
-margin:auto;
-margin-top:15px;
-font-size:18px;
-line-height:1.6;
-color:#d6e4f0;
-}
-
-/* Button */
-.btn{
-margin-top:25px;
-padding:12px 28px;
-border:none;
-background:#00ffd5;
-color:#000;
-border-radius:8px;
-font-size:16px;
-cursor:pointer;
-text-decoration:none;
-display:inline-block;
-transition:0.3s;
-font-weight:bold;
-}
-
-.btn:hover{
-transform:scale(1.05);
-box-shadow:0 0 20px #00ffd5;
-}
-
-/* Icons */
-.icons{
-margin-top:25px;
-font-size:26px;
-display:flex;
-justify-content:center;
-gap:25px;
-}
-
-.icons a{
-color:white;
-transition:0.3s;
-}
-
-.icons a:hover{
-color:#00ffd5;
-transform:scale(1.2);
-}
-
-/* Contact Section */
-.contact{
-margin-top:100px;
-padding:40px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
-}
-
-.contact h2{
-margin-bottom:15px;
-}
-
-/* Typing cursor */
-.cursor{
-display:inline-block;
-width:3px;
-background:#00ffd5;
-margin-left:5px;
-animation:blink 1s infinite;
-}
-
-@keyframes blink{
-0%,50%,100%{opacity:1;}
-25%,75%{opacity:0;}
-}
-
 </style>
 </head>
-
 <body>
 
-<nav>
-<h2>Shantanu Dhotkar</h2>
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">SD<span>.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="ham" aria-label="Menu"><i class="fas fa-bars" id="hami"></i></button>
+    </div>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-
-<img src="portfolio.png" class="profile">
-
-<h1>
-<span id="typing"></span>
-<span class="cursor"></span>
-</h1>
-
-<p>
-Electronics & Telecommunication Engineering Student specialized in
-Embedded Systems, Drone Technology, Industrial Energy Monitoring and IoT.
-Passionate about building real-world hardware + software solutions.
-</p>
-
-<a href="my_embedded_resume.pdf" class="btn" target="_blank">
-View Resume
-</a>
-
-<div class="icons">
-
-<a href="https://linkedin.com/in/shantanu-dhotkar-428211281" target="_blank">
-<i class="fab fa-linkedin"></i>
-</a>
-
-<a href="https://github.com/shantanudhotkar" target="_blank">
-<i class="fab fa-github"></i>
-</a>
-
-</div>
-
+  <div class="orb1"></div>
+  <div class="orb2"></div>
+  <div class="container">
+    <div class="hero-wrap">
+      <div>
+        <div class="hero-greeting">Hello, World!</div>
+        <h1 class="hero-name">Shantanu<br><span>Dhotkar</span></h1>
+        <div class="hero-sub"><span id="typed"></span><span class="blink"></span></div>
+        <p class="hero-desc">
+          Electronics & Telecommunication Engineering student at VIIT Pune, passionate about
+          <strong>Embedded Systems</strong>, RTOS-based firmware, and industrial IoT solutions.
+          Currently exploring <strong>Field-Oriented Control (FOC)</strong> motor drives.
+        </p>
+        <div class="hero-cta">
+          <a href="my_embedded_resume.pdf" class="btn-p" target="_blank"><i class="fas fa-download"></i> Download Resume</a>
+          <a href="#contact" class="btn-o"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://linkedin.com/in/shantanu-dhotkar-428211281" class="soc" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/shantanudhotkar" class="soc" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="mailto:shantanudhotkar1@gmail.com" class="soc"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-n">3+</div><div class="stat-l">Projects</div></div>
+          <div><div class="stat-n">8.48</div><div class="stat-l">CGPA</div></div>
+          <div><div class="stat-n">1</div><div class="stat-l">Research Paper</div></div>
+          <div><div class="stat-n">IAF</div><div class="stat-l">Internship</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="img-wrap">
+          <img src="portfolio.png" alt="Shantanu Dhotkar">
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="contact" id="contact">
-<h2>Contact Me</h2>
-<p>Email: shantanudhotkar1@gmail.com</p>
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <span class="section-tag reveal">// 01. about</span>
+    <h2 class="section-title reveal">About <span>Me</span></h2>
+    <div class="section-div reveal"></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm <strong>Shantanu Dhotkar</strong>, a 2nd-year Electronics & Telecommunication Engineering student at VIIT Pune. I'm deeply passionate about <strong>Embedded Systems</strong>, <strong>RTOS</strong>, and <strong>IoT</strong> — building hardware and firmware solutions that solve real industrial problems.</p>
+        <p>I love writing <strong>bare-metal firmware</strong> at the register level — no HAL shortcuts, pure direct control over the silicon. From manually porting FreeRTOS on Cortex-M4 to building complete RS485 Modbus RTU gateways, every project pushes me deeper into the hardware stack.</p>
+        <p>Currently working on a <strong>FOC (Field-Oriented Control)</strong> motor drive project using DRV8302 + STM32, while targeting internship and job opportunities at companies like STMicroelectronics, NXP, Infineon, and Texas Instruments.</p>
+        <div class="highlight-box">
+          <i class="fas fa-plane"></i>
+          <p>Technical Training Intern at <strong>Indian Air Force – 9 Base Repair Depot</strong>: 6 weeks of hands-on experience in Electronic Counter Measures (ECM), PCB testing & repair, and precision equipment handling.</p>
+        </div>
+      </div>
+      <div class="info-cards reveal d2">
+        <div class="ic"><i class="fas fa-graduation-cap"></i><h4>B.Tech ECE</h4><p>VIIT Pune · 2023–2027<br>CGPA: 8.48 / 10.0</p></div>
+        <div class="ic"><i class="fas fa-map-marker-alt"></i><h4>Location</h4><p>Pune, Maharashtra<br>India</p></div>
+        <div class="ic"><i class="fas fa-bolt"></i><h4>Current Focus</h4><p>FOC Motor Control<br>DRV8302 + STM32</p></div>
+        <div class="ic"><i class="fas fa-car"></i><h4>SAE India BAJA</h4><p>Electrical Member<br>DAS · CAN Bus</p></div>
+        <div class="ic"><i class="fas fa-file-alt"></i><h4>Research Paper</h4><p>Scopus Indexed<br>Grenze Journal 2024</p></div>
+        <div class="ic"><i class="fas fa-fighter-jet"></i><h4>IAF Internship</h4><p>9 BRD · 6 Weeks<br>PCB & ECM Systems</p></div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- SKILLS -->
+<section class="section skills-bg" id="skills">
+  <div class="container">
+    <span class="section-tag reveal">// 02. skills</span>
+    <h2 class="section-title reveal">Technical <span>Skills</span></h2>
+    <div class="section-div reveal"></div>
+    <div class="skills-grid">
+      <div class="skill-item reveal">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fas fa-code"></i></div><span class="skill-name">Embedded C</span></div>
+          <span class="skill-lvl">ADVANCED</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="90"></div></div>
+      </div>
+      <div class="skill-item reveal d1">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fas fa-microchip"></i></div><span class="skill-name">STM32 / ARM Cortex</span></div>
+          <span class="skill-lvl">ADVANCED</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-item reveal d2">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fas fa-exchange-alt"></i></div><span class="skill-name">SPI / I2C / UART</span></div>
+          <span class="skill-lvl">ADVANCED</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="88"></div></div>
+      </div>
+      <div class="skill-item reveal d3">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fas fa-network-wired"></i></div><span class="skill-name">RS485 / Modbus RTU</span></div>
+          <span class="skill-lvl">INTERMEDIATE</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="65"></div></div>
+      </div>
+      <div class="skill-item reveal">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fas fa-cloud"></i></div><span class="skill-name">MQTT / IoT</span></div>
+          <span class="skill-lvl">INTERMEDIATE</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="65"></div></div>
+      </div>
+      <div class="skill-item reveal d1">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fas fa-draw-polygon"></i></div><span class="skill-name">PCB Design (KiCad)</span></div>
+          <span class="skill-lvl">INTERMEDIATE</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="60"></div></div>
+      </div>
+      <div class="skill-item reveal d2">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fas fa-tasks"></i></div><span class="skill-name">FreeRTOS</span></div>
+          <span class="skill-lvl">BEGINNER</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="35"></div></div>
+      </div>
+      <div class="skill-item reveal d3">
+        <div class="skill-head">
+          <div class="skill-left"><div class="skill-ico"><i class="fab fa-python"></i></div><span class="skill-name">Python</span></div>
+          <span class="skill-lvl">BEGINNER</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" data-w="30"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <span class="section-tag reveal">// 03. projects</span>
+    <h2 class="section-title reveal">Featured <span>Projects</span></h2>
+    <div class="section-div reveal"></div>
+    <div class="proj-grid">
+
+      <div class="proj-card reveal">
+        <div class="proj-icon"><i class="fas fa-industry"></i></div>
+        <h3 class="proj-title">Remote Terminal Unit (Industrial IoT Gateway)</h3>
+        <p class="proj-desc">Industrial IoT edge node on STM32F401CCU6 acquiring 16 digital I/O via MCP23S17 SPI expander, 4–20 mA analog inputs on 12-bit ADC, and energy parameters from a Schneider EM6436H meter via RS485 Modbus RTU (8E1, CRC-16) at 1-second cycle. All data is published as JSON telemetry to HiveMQ cloud via ESP8266 using a custom bare-metal MQTT library (CONNECT/PUBLISH/PINGREQ) written entirely from scratch.</p>
+        <div class="tags">
+          <span class="tag">STM32F401CCU6</span>
+          <span class="tag">ESP8266</span>
+          <span class="tag">RS485</span>
+          <span class="tag">Modbus RTU</span>
+          <span class="tag">MQTT</span>
+          <span class="tag">MCP23S17</span>
+          <span class="tag">Bare Metal</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d1">
+        <div class="proj-icon"><i class="fas fa-th-large"></i></div>
+        <h3 class="proj-title">Smart Room Monitor with FreeRTOS</h3>
+        <p class="proj-desc">FreeRTOS v202406 manually ported bare-metal on STM32F401CCU6 — no CubeMX — with custom Cortex-M4 SysTick, PendSV, and SVCall handlers. A 4-task concurrent system reads DHT11 temperature/humidity and HC-SR04 ultrasonic distance using DWT bit-bang drivers. Sensor data shared via SensorMsg_t queue, I2C/UART buses protected with dual Mutexes, and LCD alerts triggered via a 3-bit Event Group on threshold breaches.</p>
+        <div class="tags">
+          <span class="tag">STM32F401CCU6</span>
+          <span class="tag">FreeRTOS</span>
+          <span class="tag">DHT11</span>
+          <span class="tag">HC-SR04</span>
+          <span class="tag">I2C LCD</span>
+          <span class="tag">Event Groups</span>
+          <span class="tag">Mutex</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal d2">
+        <div class="proj-icon"><i class="fas fa-bolt"></i></div>
+        <h3 class="proj-title">Energy Monitor with RS485 & Telegram</h3>
+        <p class="proj-desc">Real-time energy monitoring using ESP32 and PZEM-004T sensor over RS485 with MAX485 IC for half-duplex UART-to-RS485 conversion. Implements Modbus RTU to acquire voltage, current, active power, energy, frequency, and power factor at ±0.5% accuracy on a 15-second cycle. Sends live telemetry and threshold-based alert notifications directly to mobile via Telegram Bot API over Wi-Fi.</p>
+        <div class="tags">
+          <span class="tag">ESP32</span>
+          <span class="tag">PZEM-004T</span>
+          <span class="tag">RS485</span>
+          <span class="tag">MAX485</span>
+          <span class="tag">Modbus RTU</span>
+          <span class="tag">Telegram Bot</span>
+          <span class="tag">Wi-Fi</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section edu-bg" id="education">
+  <div class="container">
+    <span class="section-tag reveal">// 04. education & achievements</span>
+    <h2 class="section-title reveal">Education & <span>Achievements</span></h2>
+    <div class="section-div reveal"></div>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2023 – 2027</div>
+        <div class="tl-card">
+          <div class="tl-title">B.Tech — Electronics & Telecommunication Engineering</div>
+          <div class="tl-sub">Vishwakarma Institute of Information Technology (VIIT), Pune</div>
+          <span class="badge">CGPA: 8.48 / 10.0</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jun – Jul 2025</div>
+        <div class="tl-card">
+          <div class="tl-title">Technical Training Intern — Indian Air Force, 9 Base Repair Depot</div>
+          <div class="tl-sub">6-week intensive training covering ECM systems, PCB testing & repair, and precision equipment handling in an operational military environment</div>
+          <span class="badge">Internship · Pune</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Feb 2024 – Jan 2025</div>
+        <div class="tl-card">
+          <div class="tl-title">Electrical Member — Team Vishwaracers, SAE India BAJA</div>
+          <div class="tl-sub">Developed tractive system and low-voltage electrical architecture for a competitive BAJA ATV. Contributed to Data Acquisition System (DAS) development using CAN Bus protocol and gained exposure to BMS, PMSM motors, and motor controllers.</div>
+          <span class="badge">Extracurricular · ATV Racing Team</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ach-grid">
+      <div class="ach-card reveal">
+        <div class="ach-ico"><i class="fas fa-scroll"></i></div>
+        <div><h4>Scopus Indexed Research Paper</h4><p>Smart Cargo Monitoring System · Grenze International Journal · 2024</p></div>
+      </div>
+      <div class="ach-card reveal d1">
+        <div class="ach-ico"><i class="fas fa-certificate"></i></div>
+        <div><h4>Microcontroller Embedded C Programming</h4><p>Udemy Certification · 2025–2026</p></div>
+      </div>
+      <div class="ach-card reveal d2">
+        <div class="ach-ico"><i class="fas fa-trophy"></i></div>
+        <div><h4>Top 7 Teams — College-Level Hackathon</h4><p>VIIT Pune · March 2025</p></div>
+      </div>
+      <div class="ach-card reveal d3">
+        <div class="ach-ico"><i class="fas fa-flag"></i></div>
+        <div><h4>Kurukshetra 2025 — National 24-Hour Hackathon</h4><p>National Level Competition · August 2025</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <span class="section-tag reveal">// 05. contact</span>
+    <h2 class="section-title reveal">Get In <span>Touch</span></h2>
+    <div class="section-div reveal"></div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3 class="c-title">Let's work together</h3>
+        <p class="c-sub">Open to internship opportunities, embedded firmware projects, and collaborations. Feel free to reach out through any of the channels below — I'll get back to you promptly.</p>
+        <div class="c-links">
+          <a href="mailto:shantanudhotkar1@gmail.com" class="c-link">
+            <div class="c-ico"><i class="fas fa-envelope"></i></div>
+            <div class="c-text"><span>EMAIL</span><span>shantanudhotkar1@gmail.com</span></div>
+          </a>
+          <a href="https://linkedin.com/in/shantanu-dhotkar-428211281" class="c-link" target="_blank">
+            <div class="c-ico"><i class="fab fa-linkedin-in"></i></div>
+            <div class="c-text"><span>LINKEDIN</span><span>shantanu-dhotkar-428211281</span></div>
+          </a>
+          <a href="https://github.com/shantanudhotkar" class="c-link" target="_blank">
+            <div class="c-ico"><i class="fab fa-github"></i></div>
+            <div class="c-text"><span>GITHUB</span><span>github.com/shantanudhotkar</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <form class="c-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="fg">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" class="fi" placeholder="John Doe" required>
+          </div>
+          <div class="fg">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" class="fi" placeholder="john@example.com" required>
+          </div>
+          <div class="fg">
+            <label for="msg">Message</label>
+            <textarea id="msg" name="message" class="fi" placeholder="Tell me about your project or opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="c-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>Designed & Built by <span>Shantanu Dhotkar</span> · 2025</p>
+  </div>
+</footer>
 
 <script>
+// Navbar scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
 
-/* Typing Animation */
-const text = "Hi, I'm Shantanu Dhotkar 👋";
-let i = 0;
+// Hamburger
+const ham = document.getElementById('ham');
+const navLinks = document.getElementById('navLinks');
+const hami = document.getElementById('hami');
+ham.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  hami.className = navLinks.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  hami.className = 'fas fa-bars';
+}));
 
-function typingEffect(){
-if(i < text.length){
-document.getElementById("typing").innerHTML += text.charAt(i);
-i++;
-setTimeout(typingEffect,70);
+// Typing animation
+const roles = ['Embedded Systems Engineer','Firmware Developer','RTOS Enthusiast','IoT Builder'];
+let ri = 0, ci = 0, del = false;
+const tel = document.getElementById('typed');
+function type() {
+  const cur = roles[ri];
+  if (!del) {
+    tel.textContent = cur.slice(0, ++ci);
+    if (ci === cur.length) { setTimeout(() => { del = true; type(); }, 2200); return; }
+  } else {
+    tel.textContent = cur.slice(0, --ci);
+    if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+  }
+  setTimeout(type, del ? 48 : 78);
 }
-}
+type();
 
-typingEffect();
+// Scroll reveal + skill bars
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.bar-fill').forEach(b => b.style.width = b.dataset.w + '%');
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
+// Skill bars (direct observe for accuracy)
+document.querySelectorAll('.skill-item').forEach(item => {
+  const b = item.querySelector('.bar-fill');
+  if (!b) return;
+  const bo = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { b.style.width = b.dataset.w + '%'; bo.unobserve(item); }
+  }, { threshold: 0.5 });
+  bo.observe(item);
+});
 </script>
-
 </body>
 </html>
