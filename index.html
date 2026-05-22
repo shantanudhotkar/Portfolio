@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shantanu Dhotkar | Embedded Engineer</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Segoe UI',sans-serif;
+}
+
+body{
+height:100vh;
+color:white;
+background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#0f2027);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+overflow-x:hidden;
+text-align:center;
+}
+
+/* Animated background */
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Hardware grid animation */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-image:
+linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+background-size:40px 40px;
+animation:gridMove 15s linear infinite;
+z-index:-1;
+}
+
+@keyframes gridMove{
+0%{transform:translateY(0);}
+100%{transform:translateY(40px);}
+}
+
+/* Navbar */
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 60px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+}
+
+nav h2{
+font-weight:600;
+}
+
+nav ul{
+display:flex;
+gap:30px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#00ffd5;
+}
+
+/* Hero */
+.hero{
+padding-top:80px;
+}
+
+.profile{
+width:150px;
+height:150px;
+border-radius:50%;
+border:4px solid #00ffd5;
+box-shadow:0 0 30px #00ffd5;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+}
+
+.hero h1{
+font-size:48px;
+margin-top:20px;
+}
+
+.hero p{
+max-width:650px;
+margin:auto;
+margin-top:15px;
+font-size:18px;
+line-height:1.6;
+color:#d6e4f0;
+}
+
+/* Button */
+.btn{
+margin-top:25px;
+padding:12px 28px;
+border:none;
+background:#00ffd5;
+color:#000;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+text-decoration:none;
+display:inline-block;
+transition:0.3s;
+font-weight:bold;
+}
+
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #00ffd5;
+}
+
+/* Icons */
+.icons{
+margin-top:25px;
+font-size:26px;
+display:flex;
+justify-content:center;
+gap:25px;
+}
+
+.icons a{
+color:white;
+transition:0.3s;
+}
+
+.icons a:hover{
+color:#00ffd5;
+transform:scale(1.2);
+}
+
+/* Contact Section */
+.contact{
+margin-top:100px;
+padding:40px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+}
+
+.contact h2{
+margin-bottom:15px;
+}
+
+/* Typing cursor */
+.cursor{
+display:inline-block;
+width:3px;
+background:#00ffd5;
+margin-left:5px;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%,50%,100%{opacity:1;}
+25%,75%{opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>Shantanu Dhotkar</h2>
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+
+<img src="portfolio.png" class="profile">
+
+<h1>
+<span id="typing"></span>
+<span class="cursor"></span>
+</h1>
+
+<p>
+Electronics & Telecommunication Engineering Student specialized in
+Embedded Systems, Drone Technology, Industrial Energy Monitoring and IoT.
+Passionate about building real-world hardware + software solutions.
+</p>
+
+<a href="my_embedded_resume.pdf" class="btn" target="_blank">
+View Resume
+</a>
+
+<div class="icons">
+
+<a href="https://linkedin.com/in/shantanu-dhotkar-428211281" target="_blank">
+<i class="fab fa-linkedin"></i>
+</a>
+
+<a href="https://github.com/shantanudhotkar" target="_blank">
+<i class="fab fa-github"></i>
+</a>
+
+</div>
+
+</section>
+
+<section class="contact" id="contact">
+<h2>Contact Me</h2>
+<p>Email: shantanudhotkar1@gmail.com</p>
+</section>
+
+<script>
+
+/* Typing Animation */
+const text = "Hi, I'm Shantanu Dhotkar 👋";
+let i = 0;
+
+function typingEffect(){
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typingEffect,70);
+}
+}
+
+typingEffect();
+
+</script>
+
+</body>
+</html>
